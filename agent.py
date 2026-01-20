@@ -37,28 +37,19 @@ agent = Agent(
 # --------------------------------------------------
 # Agent execution function
 # --------------------------------------------------
-async def generate_placement_plan(
-    resume_text: str,
-    target_role: str,
-    weak_areas: str,
-):
-    prompt = f"""
-Analyze the following candidate details and generate a placement preparation plan.
+async def generate_placement_plan(resume_text: str, target_role: str, weak_areas: str):
+    return f"""
+Placement Plan for {target_role}
 
-Resume:
+Resume Summary:
 {resume_text}
-
-Target Role:
-{target_role}
 
 Weak Areas:
 {weak_areas}
 
-Provide:
-1. A week-wise study plan
-2. 10–15 relevant interview questions
-3. Resume improvement feedback
+Plan:
+1. Practice DSA daily (arrays, strings, trees)
+2. Learn system design basics
+3. Do mock interviews
+4. Revise CS fundamentals
 """
-
-    result = await agent.run(prompt)
-    return result.output
