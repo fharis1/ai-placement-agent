@@ -3,6 +3,10 @@ FastAPI application for the AI Placement Preparation Agent.
 This is the main entry point of the application that sets up the API server
 and defines the /generate-plan endpoint.
 """ 
+@app.get("/")
+def root():
+    return {"status": "ok", "message": "AI Placement Preparation Agent running"}
+
 from dotenv import load_dotenv
 load_dotenv()
 from fastapi import FastAPI, HTTPException
