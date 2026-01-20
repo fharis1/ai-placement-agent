@@ -3,4 +3,5 @@ uvicorn
 pydantic
 pydantic-ai-slim
 python-dotenv
-requests
+httpx
+
