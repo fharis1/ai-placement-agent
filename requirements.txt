@@ -4,4 +4,4 @@ pydantic
 pydantic-ai-slim
 python-dotenv
 httpx
-
+openai
