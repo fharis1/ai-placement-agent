@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Placement Preparation Agent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-xl">
+    <h1 class="text-2xl font-bold mb-4 text-center">
+      AI Placement Preparation Agent
+    </h1>
+
+    <textarea id="resume" class="w-full p-2 border rounded mb-3"
+      placeholder="Paste your resume here"></textarea>
+
+    <input id="role" class="w-full p-2 border rounded mb-3"
+      placeholder="Target role (e.g. Software Engineer)" />
+
+    <input id="weak" class="w-full p-2 border rounded mb-3"
+      placeholder="Weak areas (e.g. DSA, System Design)" />
+
+    <button onclick="generatePlan()"
+      class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+      Generate Plan
+    </button>
+
+    <div id="loading" class="text-center mt-4 hidden">⏳ Generating...</div>
+    <pre id="result" class="mt-4 whitespace-pre-wrap text-sm"></pre>
+  </div>
+  <script>
+    async function generatePlan() {
+      document.getElementById("loading").classList.remove("hidden");
+      document.getElementById("result").innerText = "";
+  
+      try {
+        const response = await fetch("http://127.0.0.1:8000/generate-plan", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            resume_text: document.getElementById("resume").value,
+            target_role: document.getElementById("role").value,
+            weak_areas: document.getElementById("weak").value
+          })
+        });
+  
+        const data = await response.text();   // 🔥 FIX HERE
+        document.getElementById("result").innerText = data;
+  
+      } catch (err) {
+        document.getElementById("result").innerText = "Something went wrong.";
+      }
+  
+      document.getElementById("loading").classList.add("hidden");
+    }
+  </script>
+  
+
+</body>
+</html>
